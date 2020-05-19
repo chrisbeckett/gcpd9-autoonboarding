@@ -20,7 +20,7 @@ To run this script, you will need the following:-
     - Click the **Organisation** object from the top drop down box in the GCP Console
     - Click **IAM** and click **Add**
     - In the **New Members** box, copy the e-mail address of the Service Account you created earlier *(e.g. myserviceaccount@security-project-9999.iam.gserviceaccount.com)*, pick the user when they are looked up
-    - Add the Service Account to the **Project Viewer** role and click **Save*
+    - Add the Service Account to the **Project Viewer** role and click **Save**
     
 3) Dome9 API key with admin permissions to add subscriptions (*https://supportcenter.checkpoint.com/supportcenter/portal?eventSubmit_doGoviewsolutiondetails=&solutionid=sk144514&partition=General&product=CloudGuard*)
     - Dome9 **API key**
