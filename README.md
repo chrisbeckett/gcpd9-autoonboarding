@@ -10,7 +10,7 @@ To run this script, you will need the following:-
 1) **Python 3.6** (or newer)
 
 2) A **GCP Service Account**
-    - Create a security project to manage the Service Account (optional but recommended)
+    - Create a dedicated security project to manage the Service Account (optional but recommended)
     - Go to **IAM**, **Service Accounts** and **Create Service Account**
     - Create the Service Account with a meaningful name *(D9-onboard or similar)*
     - Note the **e-mail address** of the Service Account, **you will need this later**
