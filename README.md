@@ -50,3 +50,18 @@ To run the script locally, you need to set several environment variables which a
 Running the script
 ------------------
 Simply run the script **gcp-onboard.py** from the command line 
+
+Troubleshooting
+---------------
+
+**Error** : "There was an error with the project, please check credentials and that it does not already exist in Dome9"
+
+**Fix** : Each project to be onboarded needs a minimum number of APIs to be enabled. You can do this with the **gcloud** tool
+        
+        - gcloud services enable cloudapis.googleapis.com
+        - gcloud services enable compute.googleapis.com
+        - gcloud services enable cloudresourcemanager.googleapis.com
+        
+**Error** : "Unknown error onboarding subscription to Dome9: *project-id* Status Code: 409"
+
+**Fix** : This is a cosmetic error and means the project has already been onboarded to Dome9
