@@ -47,6 +47,7 @@ verify_env_variables()
 # Read in required environment variables
 d9_api_key = os.environ['D9_API_KEY']
 d9_api_secret = os.environ['D9_API_SECRET']
+d9_api = os.environ.get('D9_API', 'https://api.dome9.com')
 gcp_creds = os.environ['GOOGLE_APPLICATION_CREDENTIALS']
 
 # Open and read the credential JSON file
@@ -73,15 +74,20 @@ def add_projects():
             print(Fore.WHITE + "Project ID updated to: ",newval)
             print(Fore.YELLOW + "Project found:", Fore.WHITE + project.name, Fore.YELLOW + "Project ID: ",Fore.GREEN + project.project_id)
             payload = {'name': project.name,'serviceAccountCredentials': creds_json_file}
-            r = requests.post('https://api.dome9.com/v2/GoogleCloudAccount',json=payload, headers=headers, auth=(d9_api_key, d9_api_secret))
+            r = requests.post(d9_api + '/v2/GoogleCloudAccount',json=payload, headers=headers, auth=(d9_api_key, d9_api_secret))
             if r.status_code == 201:
                 print(Fore.GREEN + 'Project successfully added to Dome9:', project.name)
                 print(Fore.WHITE + "===================================================================================================================","\n")
                 added_accounts = added_accounts + 1
             elif r.status_code == 400:
-                print(Fore.RED + 'There was an error with the project, please check credentials and that it does not already exist in Dome9',"\n")
+                print(Fore.RED + 'There was an error with the project, please check credentials and that it does not already exist in Dome9')
+                print("Error message:")
+                print(r.text,"\n")
             elif r.status_code == 401:
                 print(Fore.RED + 'Bad credentials onboarding project to Dome9:',project.name,"\n")
+            elif r.status_code == 409:
+                print(Fore.GREEN + 'Project already exists in Dome9:', project.name)
+                print(Fore.WHITE + "===================================================================================================================","\n")
             elif r.status_code == 500:
                 print(Fore.RED + 'Error onboarding project to Dome9, check dependent APIs are enabled in GCP:',project.name,"\n")
             else:
